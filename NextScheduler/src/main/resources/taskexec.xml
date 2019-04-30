@@ -3,8 +3,9 @@
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd">
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
 	<!-- see: https://docs.spring.io/spring/docs/4.3.23.RELEASE/spring-framework-reference/htmlsingle/#scheduling -->
@@ -18,7 +19,9 @@
 	<!-- load the class (bean) that contains the task methods we want to run -->
 	<bean
 		id="taskExecutorExample"
-		class="psc.services.pasoescheduler.PasOEScheduler" />
+		class="psc.services.pasoescheduler.PasOEScheduler"
+		p:asURL="internal://nxgas"
+		p:oeClsName="psc.queue.QueueProcessor" />
 
 	<!-- maintain a list of scheduled tasks; associate with a scheduler/executer -->
 	<task:scheduled-tasks scheduler="myscheduler">

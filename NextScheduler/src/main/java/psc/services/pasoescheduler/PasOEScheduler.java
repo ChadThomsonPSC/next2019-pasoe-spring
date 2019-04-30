@@ -19,15 +19,34 @@ import com.progress.open4gl.javaproxy.ParamArray;
 //@formatter:on        
 
 public class PasOEScheduler {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    protected final Logger log     = LoggerFactory.getLogger(getClass());
 
     private PasOEClient    m_client;
     private String         m_asURL;
     private String         m_clsName;
-    private Properties     m_props;
+    private Properties     m_props = null;
 
     public PasOEScheduler() {
-        log.info("New PasOEScheduler created");
+        log.debug("New PasOEScheduler created");
+    }
+
+    /*
+     * Getters and setters for each configuration variable
+     */
+    public String getAsURL() {
+        return m_asURL;
+    }
+
+    public void setAsURL(String AsURL) {
+        this.m_asURL = AsURL;
+    }
+
+    public String getOeClsName() {
+        return m_clsName;
+    }
+
+    public void setOeClsName(String OeClsName) {
+        this.m_clsName = OeClsName;
     }
 
     /**
@@ -39,24 +58,19 @@ public class PasOEScheduler {
 
     /**
      * This method will exec OE Tasks on the AppServer
-     * @throws Exception 
+     * 
+     * @throws Exception
      */
     public void runOETasks() throws Exception {
-        /*
-         * There is a better way to do this - we'll get to it
-         */
-        this.m_asURL   = "internal://nxgas";
-        this.m_clsName = "psc.queue.QueueProcessor";
+        // TODO: Assert that all required variables have values
 
-        this.m_props   = null;
-
-        log.info("Running with ASURL:[{}], clsName:[{}]", m_asURL, m_clsName);
+        log.debug("Running with ASURL:[{}], clsName:[{}]", m_asURL, m_clsName);
 
         /*
          * Call O4glrt/Proxy code
          **/
         if (null == m_client) {
-            log.info("Building Client");
+            log.trace("Building Client");
             createClient();
         }
 
