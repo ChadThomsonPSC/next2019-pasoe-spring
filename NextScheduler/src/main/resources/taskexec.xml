@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd">
 
 
+	<!-- see: https://docs.spring.io/spring/docs/4.3.23.RELEASE/spring-framework-reference/htmlsingle/#scheduling -->
+
+	<!-- Configure the scheduler/executer -->
+	<!-- Defines a ThreadPoolTaskScheduler instance with configurable pool size. -->
+	<task:scheduler
+		id="myscheduler"
+		pool-size="2" />
+
+	<!-- load the class (bean) that contains the task methods we want to run -->
+	<bean
+		id="taskExecutorExample"
+		class="psc.services.pasoescheduler.PasOEScheduler" />
+
+	<!-- maintain a list of scheduled tasks; associate with a scheduler/executer -->
+	<task:scheduled-tasks scheduler="myscheduler">
+		<!-- exec printMessages every minute -->
+		<task:scheduled
+			ref="taskExecutorExample"
+			method="printMessages"
+			cron="0 0/1 * * * *" />
+
+		<!-- options other than 'cron': -->
+		<!-- fixed-delay - An interval-based trigger where the interval is measured 
+			from the completion time of the previous task. -->
+		<!-- fixed-rate - An interval-based trigger where the interval is measured 
+			from the start time of the previous task. -->
+		<!-- (fixed-* only) initial-delay - Number of milliseconds to delay before 
+			the first execution -->
+	</task:scheduled-tasks>
 </beans>
