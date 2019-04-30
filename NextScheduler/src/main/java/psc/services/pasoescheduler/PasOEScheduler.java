@@ -5,6 +5,9 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.progress.open4gl.Parameter;
+import com.progress.open4gl.javaproxy.ParamArray;
+
 //@formatter:off
 /* AppServer URL format, see: PASOEInst - oeablSecurity.properties, authManagers.xml: 
  * (1) "internal://nxgas" for local PAS for OE Server
@@ -36,13 +39,16 @@ public class PasOEScheduler {
 
     /**
      * This method will exec OE Tasks on the AppServer
+     * @throws Exception 
      */
-    public void runOETasks() {
+    public void runOETasks() throws Exception {
         /*
          * There is a better way to do this - we'll get to it
          */
         this.m_asURL   = "internal://nxgas";
-        this.m_clsName = "";
+        this.m_clsName = "psc.queue.QueueProcessor";
+
+        this.m_props   = null;
 
         log.info("Running with ASURL:[{}], clsName:[{}]", m_asURL, m_clsName);
 
@@ -54,16 +60,27 @@ public class PasOEScheduler {
             createClient();
         }
 
-        log.info("Is Client Connected: {}",m_client.isConnected());
-        
-        m_client.testConnect();
+        // collect parameters : if any
+        ParamArray params = new ParamArray(0);
 
+        // our implementation returns how many tasks were executed
+        params.setReturnType(Parameter.PRO_INTEGER);
+
+        // create classObject and invoke "runAllScheduled" method
+        this.m_client.getOpenClassObject().invokeMethod("runAllScheduled", params);
+
+        // collect return value
+        Integer retval = (Integer) params.getReturnValue();
+        log.debug("Returnvalue from runAllSchedule: {}", retval);
+
+        // release class object
+        this.m_client.releaseClassObject();
     }
 
     private synchronized void createClient() {
         if (null != this.m_client) {
             return;
         }
-        m_client = new PasOEClient(this.m_asURL, this.m_clsName, null);
+        m_client = new PasOEClient(this.m_asURL, this.m_clsName, m_props);
     }
 }

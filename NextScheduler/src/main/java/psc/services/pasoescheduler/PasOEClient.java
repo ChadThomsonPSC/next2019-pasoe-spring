@@ -10,6 +10,7 @@ import com.progress.appserv.services.logging.Slf4jAppLogger;
 import com.progress.common.ehnlog.LogException;
 import com.progress.open4gl.ConnectException;
 import com.progress.open4gl.Open4GLException;
+import com.progress.open4gl.RunTime4GLException;
 import com.progress.open4gl.SystemErrorException;
 import com.progress.open4gl.javaproxy.Connection;
 import com.progress.open4gl.javaproxy.OpenAppObject;
@@ -126,5 +127,38 @@ public class PasOEClient {
         this.m_connection  = null;
 
         this.m_isConnected = Boolean.FALSE;
+    }
+    
+    public void releaseClassObject() {
+        if (null != this.m_cls) {
+            try {
+                this.m_cls._release();
+                this.m_cls = null;
+            } catch (SystemErrorException e) {
+                e.printStackTrace();
+            } catch (Open4GLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public OpenClassObject getOpenClassObject() {
+        if (null == this.m_cls) {
+            try {
+                if (!isConnected()) {
+                    connect();
+                }
+
+                this.m_cls = this.m_client.createCO(this.m_clsName);
+            } catch (RunTime4GLException e) {
+                e.printStackTrace();
+            } catch (SystemErrorException e) {
+                e.printStackTrace();
+            } catch (Open4GLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return this.m_cls;
     }
 }
