@@ -12,6 +12,5 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <javaElement handleIdentifier="=NextScheduler/src\/main\/java&lt;psc.services.pasoescheduler"/>
-        <file path="/NextScheduler/src/main/resources/taskexec.xml"/>
     </selectedElements>
 </jardesc>
