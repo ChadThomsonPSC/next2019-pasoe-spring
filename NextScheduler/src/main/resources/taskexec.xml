@@ -34,7 +34,7 @@
 		<task:scheduled
 			ref="taskExecutorExample"
 			method="runOETasks"
-			cron="0 0/1 * * * *" />
+			cron="*/15 * * * * *" />
 
 		<!-- options other than 'cron': -->
 		<!-- fixed-delay - An interval-based trigger where the interval is measured 
