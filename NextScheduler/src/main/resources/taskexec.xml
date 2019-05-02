@@ -7,7 +7,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
 	<!-- see: https://docs.spring.io/spring/docs/4.3.23.RELEASE/spring-framework-reference/htmlsingle/#scheduling -->
 
 	<!-- Configure the scheduler/executer -->
@@ -25,12 +24,7 @@
 
 	<!-- maintain a list of scheduled tasks; associate with a scheduler/executer -->
 	<task:scheduled-tasks scheduler="myscheduler">
-		<!-- exec printMessages every minute -->
-		<task:scheduled
-			ref="taskExecutorExample"
-			method="printMessages"
-			cron="0 0/1 * * * *" />
-
+		<!-- exec every 15 seconds -->
 		<task:scheduled
 			ref="taskExecutorExample"
 			method="runOETasks"
