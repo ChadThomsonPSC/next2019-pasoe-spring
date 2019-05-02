@@ -81,7 +81,7 @@ public class PasOEScheduler {
         params.setReturnType(Parameter.PRO_INTEGER);
 
         // create classObject and invoke "runAllScheduled" method
-        this.m_client.getOpenClassObject().invokeMethod("runAllScheduled", params);
+        this.m_client.getOpenClassObject().invokeMethod("runAllScheduledTasks", params);
 
         // collect return value
         Integer retval = (Integer) params.getReturnValue();
