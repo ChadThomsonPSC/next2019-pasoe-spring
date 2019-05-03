@@ -91,7 +91,7 @@ public class PasOEClient {
              * the 3rd parameter is the logging mechanism. Slf4jAppLogger directs OE log
              * information to the appropriate PASOE log
              */
-            this.m_client = new OpenAppObject(this.m_connection, null, new Slf4jAppLogger("O4gl"));
+            this.m_client = new OpenAppObject(this.m_connection, "OEScheduler", new Slf4jAppLogger("O4gl"));
 
             // return string is returned from as.srvconnectproc, session-managed
             connretstr    = this.m_client._getProcReturnString();
