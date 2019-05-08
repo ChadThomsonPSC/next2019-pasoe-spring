@@ -58,9 +58,9 @@
 <!-- our project -->
 <logger name="psc.services.pasoescheduler" level="TRACE" />
 
-<logger name="org.springframework.beans.factory.xml.XmlBeanDefinitionReader" level="DEBUG"/> 
-<logger name="org.springframework.scheduling" level="DEBUG"/> 
-<logger name="org.springframework.context" level="DEBUG"/> 
+<!-- <logger name="org.springframework.beans.factory.xml.XmlBeanDefinitionReader" level="DEBUG"/>  -->
+<!-- <logger name="org.springframework.scheduling" level="DEBUG"/>  -->
+<!-- <logger name="org.springframework.context" level="DEBUG"/>  -->
 
 <!-- quiet some default noise -->
 <logger name="com.progress.appserv.adapters.rest.Management" level="ERROR" />

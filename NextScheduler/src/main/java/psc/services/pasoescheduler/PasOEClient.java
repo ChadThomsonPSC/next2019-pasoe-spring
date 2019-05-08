@@ -55,7 +55,6 @@ public class PasOEClient {
             try {
                 connect();
             } catch (Open4GLException e) {
-                // TODO Auto-generated catch block
                 //e.printStackTrace();
                 log.error("Error during connect", e);
             }

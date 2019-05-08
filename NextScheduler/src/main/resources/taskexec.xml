@@ -29,7 +29,7 @@
 			ref="taskExecutorExample"
 			method="runOETasks"
 			cron="*/15 * * * * *" />
-
+	
 		<!-- options other than 'cron': -->
 		<!-- fixed-delay - An interval-based trigger where the interval is measured 
 			from the completion time of the previous task. -->

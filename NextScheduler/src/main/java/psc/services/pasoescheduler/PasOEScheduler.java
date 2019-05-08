@@ -62,8 +62,11 @@ public class PasOEScheduler {
      * @throws Exception
      */
     public void runOETasks() throws Exception {
+        
         // TODO: Assert that all required variables have values
-
+        // TODO: use a service, non-privileged, client-principal to run tasks.
+        //       Similar to OEREALM "registryFile".  See authManagers.xml.
+        
         log.debug("Running with ASURL:[{}], clsName:[{}]", m_asURL, m_clsName);
 
         /*
@@ -89,6 +92,9 @@ public class PasOEScheduler {
 
         // release class object
         this.m_client.releaseClassObject();
+        
+        // release connection if desired
+        // this.m_client.disconnect();
     }
 
     private synchronized void createClient() {
