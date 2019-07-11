@@ -69,7 +69,7 @@
         -->
         <param-value>
         	/WEB-INF/oeablSecurity.xml
-        	classpath:taskexec.xml
+        	/WEB-INF/taskexec.xml
        	</param-value>
 
 
