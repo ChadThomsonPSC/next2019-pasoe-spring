@@ -10,19 +10,60 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>org.springframework.ide.eclipse.core.springbuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.springframework.ide.eclipse.boot.validation.springbootbuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.springframework.ide.eclipse.core.springnature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>PASOE_REF</name>
+			<type>2</type>
+			<locationURI>PASOE_REF</locationURI>
+		</link>
+	</linkedResources>
+	<filteredResources>
+		<filter>
+			<id>1562850591662</id>
+			<name>PASOE_REF</name>
+			<type>6</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-projectRelativePath-matches-false-false-*</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1562850591666</id>
+			<name>PASOE_REF</name>
+			<type>9</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-common</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1562850591670</id>
+			<name>PASOE_REF</name>
+			<type>9</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-lib</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1562850591673</id>
+			<name>PASOE_REF</name>
+			<type>9</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-webapps</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
+	<variableList>
+		<variable>
+			<name>PASOE_REF</name>
+			<value>file:/C:/Progress/OpenEdge/servers/pasoe</value>
+		</variable>
+	</variableList>
 </projectDescription>
