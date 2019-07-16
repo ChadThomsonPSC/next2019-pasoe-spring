@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.progress.open4gl.Open4GLException;
 import com.progress.open4gl.Parameter;
 import com.progress.open4gl.javaproxy.ParamArray;
 
@@ -19,88 +20,94 @@ import com.progress.open4gl.javaproxy.ParamArray;
 //@formatter:on        
 
 public class PasOEScheduler {
-    protected final Logger log     = LoggerFactory.getLogger(getClass());
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    private PasOEClient    m_client;
-    private String         m_asURL;
-    private String         m_clsName;
-    private Properties     m_props = null;
+	private PasOEClient m_client;
+	private String m_asURL;
+	private String m_clsName;
+	private Properties m_props = null;
 
-    public PasOEScheduler() {
-        log.debug("New PasOEScheduler created");
-    }
+	public PasOEScheduler() {
+		log.debug("New PasOEScheduler created");
+	}
 
-    /*
-     * Getters and setters for each configuration variable
-     */
-    public String getAsURL() {
-        return m_asURL;
-    }
+	/*
+	 * Getters and setters for each configuration variable
+	 */
+	public String getAsURL() {
+		return m_asURL;
+	}
 
-    public void setAsURL(String AsURL) {
-        this.m_asURL = AsURL;
-    }
+	public void setAsURL(String AsURL) {
+		this.m_asURL = AsURL;
+	}
 
-    public String getOeClsName() {
-        return m_clsName;
-    }
+	public String getOeClsName() {
+		return m_clsName;
+	}
 
-    public void setOeClsName(String OeClsName) {
-        this.m_clsName = OeClsName;
-    }
+	public void setOeClsName(String OeClsName) {
+		this.m_clsName = OeClsName;
+	}
 
-    /**
-     * Any method can be used as a Task, as long as there are no parameters
-     */
-    public void printMessages() {
-        log.info("Hello Next2019");
-    }
+	/**
+	 * Any method can be used as a Task, as long as there are no parameters
+	 */
+	public void printMessages() {
+		log.info("Hello Next2019");
+	}
 
-    /**
-     * This method will exec OE Tasks on the AppServer
-     * 
-     * @throws Exception
-     */
-    public void runOETasks() throws Exception {
-        
-        // TODO: Assert that all required variables have values
-        // TODO: use a service, non-privileged, client-principal to run tasks.
-        //       Similar to OEREALM "registryFile".  See authManagers.xml.
-        
-        log.debug("Running with ASURL:[{}], clsName:[{}]", m_asURL, m_clsName);
+	/**
+	 * This method will exec OE Tasks on the AppServer
+	 * 
+	 * @throws Exception
+	 */
+	public void runOETasks() {
 
-        /*
-         * Call O4glrt/Proxy code
-         **/
-        if (null == m_client) {
-            log.trace("Building Client");
-            createClient();
-        }
+		// TODO: Assert that all required variables have values
+		// TODO: use a service, non-privileged, client-principal to run tasks.
+		// Similar to OEREALM "registryFile". See authManagers.xml.
 
-        // collect parameters : if any
-        ParamArray params = new ParamArray(0);
+		log.debug("Running with ASURL:[{}], clsName:[{}]", m_asURL, m_clsName);
+		try {
 
-        // our implementation returns how many tasks were executed
-        params.setReturnType(Parameter.PRO_INTEGER);
+			/*
+			 * Call O4glrt/Proxy code
+			 **/
+			if (null == m_client) {
+				log.trace("Building Client");
+				createClient();
+			}
 
-        // create classObject and invoke "runAllScheduled" method
-        this.m_client.getOpenClassObject().invokeMethod("runAllScheduledTasks", params);
+			// collect parameters : if any
+			ParamArray params = new ParamArray(0);
 
-        // collect return value
-        Integer retval = (Integer) params.getReturnValue();
-        log.debug("Returnvalue from runAllSchedule: {}", retval);
+			// our implementation returns how many tasks were executed
 
-        // release class object
-        this.m_client.releaseClassObject();
-        
-        // release connection if desired
-        // this.m_client.disconnect();
-    }
+			params.setReturnType(Parameter.PRO_INTEGER);
 
-    private synchronized void createClient() {
-        if (null != this.m_client) {
-            return;
-        }
-        m_client = new PasOEClient(this.m_asURL, this.m_clsName, m_props);
-    }
+			// create classObject and invoke "runAllScheduled" method
+			this.m_client.getOpenClassObject().invokeMethod("runAllScheduledTasks", params);
+
+			// collect return value
+			Integer retval = (Integer) params.getReturnValue();
+			log.debug("Returnvalue from runAllSchedule: {}", retval);
+
+			// release class object
+			this.m_client.releaseClassObject();
+
+			// release connection if desired
+			// this.m_client.disconnect();
+		} catch (Open4GLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private synchronized void createClient() {
+		if (null != this.m_client) {
+			return;
+		}
+		m_client = new PasOEClient(this.m_asURL, this.m_clsName, m_props);
+	}
 }

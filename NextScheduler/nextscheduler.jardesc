@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ANSI_X3.4-1968" standalone="no"?>
 <jardesc>
-    <jar path="NextScheduler/deploy/pasoe/NextScheduler.jar"/>
-    <options buildIfNeeded="true" compress="true" descriptionLocation="/NextScheduler/nextscheduler.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <jar path="NextScheduler/deploy/pasoe/common/lib/NextScheduler.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/NextScheduler/nextscheduler.jardesc" exportErrors="false" exportWarnings="false" includeDirectoryEntries="false" overwrite="false" saveDescription="false" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
     <manifest generateManifest="false" manifestLocation="/NextScheduler/nextscheduler.mf" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
