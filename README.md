@@ -6,7 +6,7 @@ As presented at Progress NEXT 2019 - Doing more with PASOE and Spring, May 2019.
 
 ## Mirrored Repository
 
-This repository is maintained [@ GitLab](https://gitlab.com/ChadThomsonPSC/next2019-pasoe-spring) and it mirrored repository here.
+This repository is maintained [@ GitLab](https://gitlab.com/ChadThomsonPSC/next2019-pasoe-spring) and is then mirrored here.
 
 ## Changes
 
